@@ -1,29 +1,35 @@
 #include <stdio.h>
+#include <stdlib.h>
 
-void squeezer(char s[], char c[]);
+struct squeezer_de_ouf
+{
+    int first_nb;
+    int second_nb;
+    int third_nb;
+    int fourth_nb;
+};
 
-void main()
+int main()
 {
-    char s1[] = "abcdefgabcdefgabcdefg";
-    char s2[] = "abcd";
-    squeezer(s1, s2);
-}
-void squeezer(char s[], char c[])
-{
-    int i, j, k, z;
-    for (k = 0; c[k] != '\0'; k++)
+    struct squeezer_de_ouf *squeezer_de_ouf = malloc(sizeof(struct squeezer_de_ouf));
+    squeezer_de_ouf->first_nb = 10;
+    squeezer_de_ouf->second_nb = 20;
+    squeezer_de_ouf->third_nb = 30;
+    squeezer_de_ouf->fourth_nb = 40;
+
+    // This code should display the 4 numbers
+    // 10
+    // 20
+    // 30
+    // 40
+    
+    int *ptr = (int *)squeezer_de_ouf;
+    for (int i = 0; i < 4; i++)
     {
-        for (i = j = 0; s[i] != '\0'; i++)
-        {
-            if (s[i] != c[k])
-            {
-                s[j++] = s[i];
-            }
-            s[j] = '\0';
-        }
+        printf("%d\n", *ptr);
+        ptr += sizeof(int);
     }
 
-    for (z = 0; z < j; z++)
-        printf("%c", s[z]);
-    printf("\n");
+    free(squeezer_de_ouf);
+    return 0;
 }
